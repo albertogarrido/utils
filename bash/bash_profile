@@ -14,15 +14,16 @@ export CLICOLOR=1
 ################### alias ###################
 
 #system utilities
-alias resetbashProfile='source ~/.bash_profile;echo -n "Done";'
-alias editbashProfile='subl ~/.bash_profile'
+alias resetbashProfile='source ~/.bash_profile;echo  " *** Done *** ";'
+alias editbashProfile='vim ~/.bash_profile'
 alias ls='ls -aFhlG'
+alias l='ls -aFhlG'
 alias ll='ls -l'
 alias search=grep
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias v='vim'
+alias vim='mvim'
 
 ## MAMP
 alias webserverdirectory='cd /Applications/MAMP/htdocs'
