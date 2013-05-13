@@ -46,6 +46,9 @@ alias sshClients='ssh -p 22222 innerfunction@173.203.91.164'
 alias sshk40s='ssh -l k40s k40s.org'
 alias mysqlk40s='mysql -u k40s -p -h mysql.k40s.org'
 
+#git
+alias gs='git status'
+alias pull='git pull'
 
 
 
