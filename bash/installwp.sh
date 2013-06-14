@@ -1,12 +1,8 @@
 #!/bin/bash
 
-# Init
-FILE="/tmp/out.$$"
-GREP="/bin/grep"
-#....
 # Make sure only root can run our script
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 1>&2
+   echo "This script must be run as root or with sudo" 1>&2
    exit 1
 fi
 
@@ -22,6 +18,8 @@ fi
 PROJECT=$1
 TEMP_WP_DIR=/tmp/wp
 SERVER_DIR=/Library/WebServer/Documents
+DB_USER=root
+DB_PASS=''
 
 echo "Checking previous instalations... "
 if [ -d $SERVER_DIR/$PROJECT ]; then
@@ -44,7 +42,7 @@ cd $TEMP_WP_DIR
 
 echo "Downloading latest version of wordpress ... "
 
-curl -O http://wordpress.org/latest.zip > /dev/null 2> wp_install_log.txt
+curl -O http://wordpress.org/latest.zip  2> wp_install_log.txt
 
 echo "Unziping wordpress ... "
 
@@ -54,7 +52,25 @@ echo "Installing Wordpress..."
 
 mv wordpress/* $SERVER_DIR/$PROJECT
 
+echo "Creating database $PROJECT ..."
+echo "create database $PROJECT" | mysql -u root
 
+cd $SERVER_DIR/$PROJECT
 
-#CREATING DATABASE
-#echo "create database $PROJECT" | mysql -u root
+cp wp-config-sample.php wp-config.php
+
+WPDBNAME=`cat wp-config.php | grep DB_NAME | cut -d \' -f 4`
+WPDBUSER=`cat wp-config.php | grep DB_USER | cut -d \' -f 4`
+WPDBPASS=`cat wp-config.php | grep DB_PASSWORD | cut -d \' -f 4`
+
+echo "Configuring wordpress... "
+
+perl -pi -e "s/$WPDBNAME/$PROJECT/g" wp-config.php
+perl -pi -e "s/$WPDBUSER/$DB_USER/g" wp-config.php
+perl -pi -e "s/$WPDBPASS/$DB_PASS/g" wp-config.php
+
+echo "Launching in browser... "
+open http://localhost/$PROJECT
+
+#cleaning temp dir
+rm -r $TEMP_WP_DIR/*
