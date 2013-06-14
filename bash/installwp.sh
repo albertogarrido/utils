@@ -42,7 +42,7 @@ cd $TEMP_WP_DIR
 
 echo "Downloading latest version of wordpress ... "
 
-curl -O http://wordpress.org/latest.zip  2> wp_install_log.txt
+curl -O http://wordpress.org/latest.zip > /dev/null 2> wp_install_log.txt
 
 echo "Unziping wordpress ... "
 
