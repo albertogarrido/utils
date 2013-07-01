@@ -69,6 +69,14 @@ perl -pi -e "s/$WPDBNAME/$PROJECT/g" wp-config.php
 perl -pi -e "s/$WPDBUSER/$DB_USER/g" wp-config.php
 perl -pi -e "s/$WPDBPASS/$DB_PASS/g" wp-config.php
 
+touch .htaccess
+chmod 777 .htaccess 
+
+cd wp-content
+mkdir -p uploads
+chmod 777 uploads
+cd ..
+
 echo "Launching in browser... "
 open http://localhost/$PROJECT
 
