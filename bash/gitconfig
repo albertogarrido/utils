@@ -1,0 +1,22 @@
+[user]
+	name = albertogarrido
+	email = alberto.garrido@go-movil.es
+[credential]
+	helper = osxkeychain
+[color]
+	ui = true
+	diff = true
+	interactive = always
+#[diff]
+#    tool = vimdiff
+
+#[difftool "vimdiff"]
+#    cmd = default-difftool.sh $LOCAL $REMOTE
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+[core]
+	editor = vim
