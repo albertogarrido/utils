@@ -7,6 +7,7 @@ export PATH=/usr/local/mysql/bin:/Users/k40s/android-sdks/tools:/Applications/MA
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 # Set CLICOLOR if you want Ansi Colors in iTerm2
 export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # Set colors to match iTerm2 Terminal Colors
 # export TERM=xterm-256color
@@ -15,47 +16,65 @@ export CLICOLOR=1
 
 #system utilities
 alias resetbashProfile='source ~/.bash_profile;echo  " *** Done *** ";'
-alias editbashProfile='vim ~/.bash_profile'
-alias ls='ls -aFhlG'
+alias editbashProfile='subl ~/.bash_profile'
 alias l='ls -aFhlG'
-alias ll='ls -l'
+alias ll='ls -aFhlG'
 alias search=grep
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias vim='mvim'
+alias deleteDSStore='find . -name ".DS_Store" -exec rm -rf {} \;'
+alias draw9patch='/Applications/adt-bundle-mac-x86_64-20140702/sdk/tools/draw9patch'
 
-## MAMP
-alias webserverdirectory='cd /Applications/MAMP/htdocs'
+
+
+## SERVER
+alias tailapache='tail -f /var/log/apache2/error_log | egrep -v "(.gif|.jpg|.png|.swf|.ico|.txt|.xml|.css|.js|.rss)"'
 
 #directory
-alias gotowebServerDirectory='cd /Library/WebServer/Documents/;echo -n " ***  Your current directory is:";pwd'
-alias gotoworkspace='cd ~/Dropbox/workspace;echo -n " *** Your current directory is:";pwd'
+alias webserverDirectory='cd /Library/WebServer/Documents/;echo -n " ***  directory changed:";pwd'
+alias workspace='cd ~/Development;echo -n " *** directory changed:";pwd'
+alias zierzo='cd ~/Development/zierzolabs;echo -n " *** directory changed:";pwd'
+alias innerworkspace='cd ~/Development/innerfunction;echo -n " *** directory changed:";pwd'
+alias epcore='cd ~/Development/innerfunction/EPCore;echo -n " *** directory changed:";pwd'
+alias epclients='cd ~/Development/innerfunction/EPClients;echo -n " *** directory changed:";pwd'
+alias semoserver='cd ~/Development/innerfunction/Semo-Server;echo -n " *** directory changed:";pwd'
+alias eventpac='cd ~/Development/innerfunction/Eventpac;echo -n " *** directory changed:";pwd'
+alias scoreRivals='cd ~/Development/innerfunction/Score-Rivals;echo -n " *** directory changed:";pwd'
+alias albertoweb='cd ~/Development/webs/albertogarrido.net;echo -n " --- directory changed: ";pwd'
+alias desktop='cd ~/Desktop;echo -n " --- directory changed: ";pwd'
+alias stuff='cd ~/Downloads/stuffDownloads;echo -n " --- directory changed: ";pwd'
+
+##MYSQL
+export MYSQL_HOME=/usr/local/mysql
+alias start_mysql='sudo $MYSQL_HOME/bin/mysqld_safe &'
+alias stop_mysql='sudo $MYSQL_HOME/bin/mysqladmin shutdown'
 
 ##project directory
-#alias themeDirectoryWorkmans='cd /Library/WebServer/Documents/theworkmansclub/wp-content/themes/theworkmansclub-theme/;echo -n " ***  Your current directory is:";pwd'
-#alias themeDirectoryWebMob='cd /Library/WebServer/Documents/webmobnew/wp-content/themes/moviweb-tpl/;echo -n " ***  Your current directory is:";pwd'
-# alias themeDirectory='cd /Library/WebServer/Documents/theworkmansclub/wp-content/themes/theworkmansclub-theme/;echo -n " ***  Your current directory is:";pwd'~/
+#alias themeDirectoryWorkmans='cd /Library/WebServer/Documents/theworkmansclub/wp-content/themes/theworkmansclub-theme/;echo -n " ***  directory changed:";pwd'
+#alias themeDirectoryWebMob='cd /Library/WebServer/Documents/webmobnew/wp-content/themes/moviweb-tpl/;echo -n " ***  directory changed:";pwd'
+# alias themeDirectory='cd /Library/WebServer/Documents/theworkmansclub/wp-content/themes/theworkmansclub-theme/;echo -n " ***  directory changed:";pwd'~/
 
 #apps
 alias sb='subl'
+alias mou='open -a Mou'
 
-#Connections
-alias sshHome='ssh -p 22222 innerfunction@173.203.78.246'
-alias sshClients='ssh -p 22222 innerfunction@173.203.91.164'
-alias sshk40s='ssh -l k40s k40s.org'
-alias mysqlk40s='mysql -u k40s -p -h mysql.k40s.org'
 
-#git
-alias gs='git status'
-alias pull='git pull'
+#DISPLAY
+
+alias turnOffMBPScreen='sudo nvram boot-args="iog=0x0"'
+alias turnOnMBPScreen='sudo nvram -d boot-args'
 
 
 
-#colores de javi
+
+#colors
 # Comment in the above and uncomment this below for a color prompt
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
+#PS1=#'${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PS1='${debian_chroot:+($debian_chroot)}\[\e[00;36m\]\T\[\e[0m\]\[\e[00;37m\]-\[\e[0m\]\[\e[00;32m\]\u\[\e[0m\]\[\e[00;37m\]@\[\e[0m\]\[\e[00;33m\]\h\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;34m\]\w\[\e[0m\]\[\e[00;37m\] \n $\[\e[0m\] '
+#export SUDO_PS1="\[\h:\w\] \u\\$ "
+export SUDO_PS1="\[\e[01;31m\]\t-\u@\h\[\e[0m\]\[\e[00;31m\]:\[\e[0m\]\[\e[01;31m\]\w\[\e[0m\]\[\e[00;31m\]\[\e[0m\]\[\e[00;37m\]#\[\e[0m\] "
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
@@ -65,3 +84,14 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
+source ~/.nvm/nvm.sh
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:/Users/AlbertoGarrido/.composer/vendor/bin:$PATH"
+PATH=$PATH:/usr/local/sbin
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+PATH=$PATH:/Users/AlbertoGarrido/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems
+
+export PATH=/usr/local/php5/bin:$PATH
+export PATH=/Applications/adt-bundle-mac-x86_64-20140702/sdk/platform-tools:$PATH
