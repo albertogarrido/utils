@@ -8,6 +8,19 @@ set ttyfast
 " Enable mouse use in all modes
 set mouse=a
 
+" enable line number
+set number
+
 " Set this to the name of your terminal that supports mouse codes.
 " Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
 set ttymouse=xterm2
+
+" size of a hard tabstop
+set tabstop=4
+
+" size of an indent
+set shiftwidth=4
+
+" a combination of spaces and tabs are used to simulate tab stops at a width
+" other than the (hard)tabstop
+set softtabstop=4

@@ -1,17 +1,11 @@
 [user]
 	name = albertogarrido
-	email = alberto.garrido@go-movil.es
+	email = zgz.alberto@gmail.com
 [credential]
 	helper = osxkeychain
 [color]
 	ui = true
 	diff = true
-	interactive = always
-#[diff]
-#    tool = vimdiff
-
-#[difftool "vimdiff"]
-#    cmd = default-difftool.sh $LOCAL $REMOTE
 [diff]
 	tool = vimdiff
 [difftool]
@@ -19,4 +13,9 @@
 [alias]
 	d = difftool
 [core]
+	excludesfile = /Users/AlbertoGarrido/.gitignore_global
 	editor = vim
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
